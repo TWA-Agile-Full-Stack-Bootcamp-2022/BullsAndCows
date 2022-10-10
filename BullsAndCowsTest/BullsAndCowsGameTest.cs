@@ -63,5 +63,23 @@ namespace BullsAndCowsTest
             var guessLog = game.GetAnswer("0324", SecretNumbers);
             Assert.Equal("1A2B", guessLog.GetAnswer());
         }
+
+        [Fact]
+        public void Should_return_wrong_input_when_guess_given_12()
+        {
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            var output = game.Guess("12");
+            Assert.Equal("Wrong Input, input again", output);
+        }
+
+        [Fact]
+        public void Should_return_wrong_input_when_guess_given_1123()
+        {
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            var output = game.Guess("2311");
+            Assert.Equal("Wrong Input, input again", output);
+        }
     }
 }

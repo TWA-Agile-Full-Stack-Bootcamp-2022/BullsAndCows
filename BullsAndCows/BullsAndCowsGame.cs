@@ -17,7 +17,12 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            throw new NotImplementedException();
+            if (!guess.Length.Equals(4) || HasDuplicateNumber(guess))
+            {
+                return "Wrong Input, input again";
+            }
+
+            return "null";
         }
 
         public List<int> CountBulls(string s, int[] secretNumbers)
@@ -84,6 +89,19 @@ namespace BullsAndCows
             }
 
             return "x";
+        }
+
+        private bool HasDuplicateNumber(string guess)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (guess.LastIndexOf(guess.Substring(i, 1), StringComparison.Ordinal) > i)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
