@@ -16,5 +16,20 @@ namespace BullsAndCows
         {
             throw new NotImplementedException();
         }
+
+        public int CountBulls(string s, int[] secretNumbers)
+        {
+            var charArray = s.ToCharArray();
+            int count = 0;
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (secretNumbers[i].Equals(int.Parse(charArray[i].ToString())))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
     }
 }
