@@ -34,7 +34,7 @@ namespace BullsAndCowsTest
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             var countBulls = game.CountBulls("1234", SecretNumbers);
-            Assert.Equal(4, countBulls);
+            Assert.Equal(4, countBulls.Count);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace BullsAndCowsTest
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             var countBulls = game.CountCows("4321", SecretNumbers);
-            Assert.Equal(4, countBulls);
+            Assert.Equal(4, countBulls.Count);
         }
 
         [Fact]
@@ -51,8 +51,8 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            var answer = game.GetAnswer("5678", SecretNumbers);
-            Assert.Equal("0A0B", answer);
+            var guessLog = game.GetAnswer("5678", SecretNumbers);
+            Assert.Equal("0A0B", guessLog.GetAnswer());
         }
 
         [Fact]
@@ -60,8 +60,8 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            var answer = game.GetAnswer("0324", SecretNumbers);
-            Assert.Equal("1A2B", answer);
+            var guessLog = game.GetAnswer("0324", SecretNumbers);
+            Assert.Equal("1A2B", guessLog.GetAnswer());
         }
     }
 }

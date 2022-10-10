@@ -20,41 +20,70 @@ namespace BullsAndCows
             throw new NotImplementedException();
         }
 
-        public int CountBulls(string s, int[] secretNumbers)
+        public List<int> CountBulls(string s, int[] secretNumbers)
         {
             var charArray = s.ToCharArray();
-            int count = 0;
+            List<int> bulls = new List<int>();
             for (int i = 0; i < charArray.Length; i++)
             {
-                if (secretNumbers[i].Equals(int.Parse(charArray[i].ToString())))
+                var item = int.Parse(charArray[i].ToString());
+                if (secretNumbers[i].Equals(item))
                 {
-                    count++;
+                    bulls.Add(item);
                 }
             }
 
-            return count;
+            return bulls;
         }
 
-        public int CountCows(string s, int[] secretNumbers)
+        public List<int> CountCows(string s, int[] secretNumbers)
         {
             var charArray = s.ToCharArray();
-            int count = 0;
+            List<int> cows = new List<int>();
             for (int i = 0; i < charArray.Length; i++)
             {
-                if (secretNumbers.Contains(int.Parse(charArray[i].ToString())))
+                var item = int.Parse(charArray[i].ToString());
+                if (secretNumbers.Contains(item))
                 {
-                    count++;
+                    cows.Add(item);
                 }
             }
 
-            return count;
+            return cows;
         }
 
-        public string GetAnswer(string s, int[] secretNumbers)
+        public GuessLog GetAnswer(string input, int[] secretNumbers)
         {
-            int countBulls = CountBulls(s, secretNumbers);
-            int countCows = CountCows(s, secretNumbers) - countBulls;
-            return countBulls + "A" + countCows + "B";
+            List<int> bulls = CountBulls(input, secretNumbers);
+            List<int> cows = CountCows(input, secretNumbers).FindAll(e => !bulls.Contains(e));
+
+            return ParseGuessLog(input, bulls, cows, secretNumbers.Length);
+        }
+
+        public GuessLog ParseGuessLog(string input, List<int> countBulls, List<int> countCows, int maxLength)
+        {
+            return new GuessLog(input, countBulls.Count + "A" + countCows.Count + "B",
+                ParseMeaningOfAnswer(countBulls, countCows, maxLength));
+        }
+
+        public string ParseMeaningOfAnswer(List<int> countBulls, List<int> countCows, int maxLength)
+        {
+            if (countBulls.Count.Equals(maxLength))
+            {
+                return "all correct";
+            }
+
+            if (countCows.Count.Equals(maxLength))
+            {
+                return "all in wrong positions";
+            }
+
+            if (countCows.Count.Equals(0) && countBulls.Count.Equals(0))
+            {
+                return "all wrong";
+            }
+
+            return "x";
         }
     }
 }
