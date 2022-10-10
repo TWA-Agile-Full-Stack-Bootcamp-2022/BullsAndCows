@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BullsAndCows
@@ -6,6 +7,7 @@ namespace BullsAndCows
     public class BullsAndCowsGame
     {
         private readonly SecretGenerator secretGenerator;
+
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -46,6 +48,11 @@ namespace BullsAndCows
             }
 
             return count;
+        }
+
+        public string GetAnswer(string s, int[] secretNumbers)
+        {
+            return CountBulls(s, secretNumbers) + "A" + CountCows(s, secretNumbers) + "B";
         }
     }
 }
