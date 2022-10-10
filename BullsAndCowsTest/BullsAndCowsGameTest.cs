@@ -55,5 +55,15 @@ namespace BullsAndCowsTest
             var answer = game.GetAnswer("5678", secretNumbers);
             Assert.Equal("0A0B", answer);
         }
+
+        [Fact]
+        public void Should_return_1A2B_when_getAnswer_given_input_0324_and_secretNumber_is_1234()
+        {
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            int[] secretNumbers = { 1, 2, 3, 4 };
+            var answer = game.GetAnswer("0324", secretNumbers);
+            Assert.Equal("1A2B", answer);
+        }
     }
 }

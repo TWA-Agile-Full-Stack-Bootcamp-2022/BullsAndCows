@@ -52,7 +52,9 @@ namespace BullsAndCows
 
         public string GetAnswer(string s, int[] secretNumbers)
         {
-            return CountBulls(s, secretNumbers) + "A" + CountCows(s, secretNumbers) + "B";
+            int countBulls = CountBulls(s, secretNumbers);
+            int countCows = CountCows(s, secretNumbers) - countBulls;
+            return countBulls + "A" + countCows + "B";
         }
     }
 }
