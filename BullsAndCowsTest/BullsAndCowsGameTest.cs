@@ -17,6 +17,8 @@ namespace BullsAndCowsTest
 {
     public class BullsAndCowsGameTest
     {
+        private static readonly int[] SecretNumbers = { 1, 2, 3, 4 };
+
         [Fact]
         public void Should_create_BullsAndCowsGame()
         {
@@ -31,8 +33,7 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            int[] secretNumbers = { 1, 2, 3, 4 };
-            var countBulls = game.CountBulls("1234", secretNumbers);
+            var countBulls = game.CountBulls("1234", SecretNumbers);
             Assert.Equal(4, countBulls);
         }
 
@@ -41,8 +42,7 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            int[] secretNumbers = { 1, 2, 3, 4 };
-            var countBulls = game.CountCows("4321", secretNumbers);
+            var countBulls = game.CountCows("4321", SecretNumbers);
             Assert.Equal(4, countBulls);
         }
 
@@ -51,8 +51,7 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            int[] secretNumbers = { 1, 2, 3, 4 };
-            var answer = game.GetAnswer("5678", secretNumbers);
+            var answer = game.GetAnswer("5678", SecretNumbers);
             Assert.Equal("0A0B", answer);
         }
 
@@ -61,8 +60,7 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            int[] secretNumbers = { 1, 2, 3, 4 };
-            var answer = game.GetAnswer("0324", secretNumbers);
+            var answer = game.GetAnswer("0324", SecretNumbers);
             Assert.Equal("1A2B", answer);
         }
     }
