@@ -16,6 +16,7 @@ namespace BullsAndCowsRunner
                 Console.WriteLine(output);
             }
 
+            Console.WriteLine(string.Join("\n", game.GuessLogs));
             Console.WriteLine("Game Over");
         }
     }

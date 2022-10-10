@@ -16,6 +16,11 @@ namespace BullsAndCows
             this.meaningOfAnswer = meaningOfAnswer;
         }
 
+        public override string ToString()
+        {
+            return this.input + "\t" + this.answer + "\t" + this.meaningOfAnswer;
+        }
+
         public string GetAnswer()
         {
             return answer;

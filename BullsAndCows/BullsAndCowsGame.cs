@@ -10,6 +10,8 @@ namespace BullsAndCows
 
         private bool canContinue = true;
 
+        private List<GuessLog> guessLogs = new List<GuessLog>();
+
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -18,10 +20,11 @@ namespace BullsAndCows
         public bool CanContinue
         {
             get => canContinue;
-            set
-            {
-                canContinue = value;
-            }
+        }
+
+        public List<GuessLog> GuessLogs
+        {
+            get => guessLogs;
         }
 
         public string Guess(string guess)
@@ -29,13 +32,15 @@ namespace BullsAndCows
             if (!guess.Length.Equals(4) || HasDuplicateNumber(guess))
             {
                 GuessLog guessLog = new GuessLog(guess, "Wrong Input, input again", "Wrong Input, input again");
+                guessLogs.Add(guessLog);
                 return guessLog.GetMeaningOfAnswer();
             }
 
             GuessLog log = GetAnswer(guess, secretGenerator.GenerateSecret());
+            guessLogs.Add(log);
             if (log.GetAnswer().Equals("4A0B"))
             {
-                this.CanContinue = false;
+                this.canContinue = false;
             }
 
             return log.GetMeaningOfAnswer();
