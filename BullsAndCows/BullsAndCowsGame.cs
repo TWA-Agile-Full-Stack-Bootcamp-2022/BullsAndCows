@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -24,6 +25,21 @@ namespace BullsAndCows
             for (int i = 0; i < charArray.Length; i++)
             {
                 if (secretNumbers[i].Equals(int.Parse(charArray[i].ToString())))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int CountCows(string s, int[] secretNumbers)
+        {
+            var charArray = s.ToCharArray();
+            int count = 0;
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (secretNumbers.Contains(int.Parse(charArray[i].ToString())))
                 {
                     count++;
                 }

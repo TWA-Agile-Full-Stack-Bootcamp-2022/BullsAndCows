@@ -31,9 +31,18 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            var inputStr = "1234";
             int[] secretNumbers = { 1, 2, 3, 4 };
             var countBulls = game.CountBulls("1234", secretNumbers);
+            Assert.Equal(4, countBulls);
+        }
+
+        [Fact]
+        public void Should_return_4_when_countCows_given_input_4321_and_secretNumber_is_1234()
+        {
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            int[] secretNumbers = { 1, 2, 3, 4 };
+            var countBulls = game.CountCows("4321", secretNumbers);
             Assert.Equal(4, countBulls);
         }
     }
