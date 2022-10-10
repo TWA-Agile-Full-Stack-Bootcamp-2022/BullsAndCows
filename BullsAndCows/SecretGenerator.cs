@@ -4,9 +4,9 @@ namespace BullsAndCows
 {
     public class SecretGenerator
     {
-        public virtual string GenerateSecret()
+        public virtual int[] GenerateSecret()
         {
-            throw new NotImplementedException();
+            return new int[] { 1, 2, 3, 4 };
         }
     }
 }
