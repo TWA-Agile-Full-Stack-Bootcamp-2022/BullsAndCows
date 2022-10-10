@@ -8,21 +8,37 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
 
+        private bool canContinue = true;
+
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue
+        {
+            get => canContinue;
+            set
+            {
+                canContinue = value;
+            }
+        }
 
         public string Guess(string guess)
         {
             if (!guess.Length.Equals(4) || HasDuplicateNumber(guess))
             {
-                return "Wrong Input, input again";
+                GuessLog guessLog = new GuessLog(guess, "Wrong Input, input again", "Wrong Input, input again");
+                return guessLog.GetMeaningOfAnswer();
             }
 
-            return "null";
+            GuessLog log = GetAnswer(guess, secretGenerator.GenerateSecret());
+            if (log.GetAnswer().Equals("4A0B"))
+            {
+                this.CanContinue = false;
+            }
+
+            return log.GetMeaningOfAnswer();
         }
 
         public List<int> CountBulls(string s, int[] secretNumbers)
@@ -88,7 +104,27 @@ namespace BullsAndCows
                 return "all wrong";
             }
 
-            return "x";
+            if (countBulls.Count > 0 && countCows.Count > 0)
+            {
+                return GetBullsOutput(countBulls) + ", " + string.Join('&', countCows) + "are in wrong positions";
+            }
+
+            if (countBulls.Count > 0)
+            {
+                return GetBullsOutput(countBulls);
+            }
+
+            return GetCowsOutput(countCows);
+        }
+
+        private static string GetBullsOutput(List<int> countBulls)
+        {
+            return string.Join(" & ", countBulls) + " is correct";
+        }
+
+        private static string GetCowsOutput(List<int> countCows)
+        {
+            return string.Join(" & ", countCows) + " are in wrong positions";
         }
 
         private bool HasDuplicateNumber(string guess)
