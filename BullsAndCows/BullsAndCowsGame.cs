@@ -7,6 +7,7 @@ namespace BullsAndCows
     {
         private readonly ISecretGenerator secretGenerator;
         private readonly string screit;
+
         public BullsAndCowsGame(ISecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -17,7 +18,21 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            return "0A0B";
+            var secret = this.screit.ToCharArray();
+            var inputNumbers = guess.ToCharArray();
+            var match = 0;
+            for (var i = 0; i < secret.Length; i++)
+            {
+                for (var j = 0; j < inputNumbers.Length; j++)
+                {
+                    if (inputNumbers[j] == secret[i] && i == j)
+                    {
+                        match += 1;
+                    }
+                }
+            }
+
+            return match + "A" + "0B";
         }
 
         public string GetSecret()
