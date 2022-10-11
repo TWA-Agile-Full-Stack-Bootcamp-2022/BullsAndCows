@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -20,17 +21,7 @@ namespace BullsAndCows
         {
             var secret = this.screit.ToCharArray();
             var inputNumbers = guess.ToCharArray();
-            var match = 0;
-            for (var i = 0; i < secret.Length; i++)
-            {
-                for (var j = 0; j < inputNumbers.Length; j++)
-                {
-                    if (inputNumbers[j] == secret[i] && i == j)
-                    {
-                        match += 1;
-                    }
-                }
-            }
+            var match = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1 && i == j).Count()).Sum();
 
             return match + "A" + "0B";
         }
