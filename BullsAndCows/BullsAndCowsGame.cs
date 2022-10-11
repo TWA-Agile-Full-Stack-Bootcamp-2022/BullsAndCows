@@ -27,6 +27,11 @@ namespace BullsAndCows
                 return "Wrong Input, input again";
             }
 
+            if (inputNumbers.Length != 4)
+            {
+                return "Wrong Input, input again";
+            }
+
             var match = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1 && i == j).Count()).Sum();
             var positionErrorMatch = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1).Count()).Sum();
 
