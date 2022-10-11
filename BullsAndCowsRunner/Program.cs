@@ -9,7 +9,7 @@ namespace BullsAndCowsRunner
         {
             SecretGenerator secretGenerator = new SecretGenerator();
             BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
-            while (game.CanContinue)
+            while (game.IsCanContinue())
             {
                 var input = Console.ReadLine();
                 var output = game.Guess(input);

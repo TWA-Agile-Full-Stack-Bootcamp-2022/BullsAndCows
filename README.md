@@ -26,6 +26,52 @@ For example: the secret is 1 2 3 4, then there are the following outputs based o
 ## Practice Requirement
 
 1. Draw the whole task diagram firstly.
+![img.png](img.png)
 2. Design and write tests for a task.
+```angular2html
+given : secret generator
+when : new game
+then: should set secret as generated
+```
+```angular2html
+given: new game secret 1234 and guess 5 6 7 8
+when: guess
+then: 0A0B
+```
+
+```angular2html
+given:  new game secret 1234 and guess 1 5 6 7
+when: guess
+then: 1A0B
+```
+
+```angular2html
+given:  new game secret 1234 and guess 0 3 2 4
+when: guess
+then: 1A2B
+```
+```angular2html
+given: new game secret 1234 and guess 1132
+when: guess
+then: Wrong Input, input again
+```
+
+```angular2html
+given: new game secret 1234 and guess 12
+when: guess
+then: Wrong Input, input again
+```
+
+```angular2html
+given: new game secret 1234 
+when: guess over 6
+then: canbecontinue is false
+```
+
+```angular2html
+given: secret generator
+when: GenerateSecret
+then: return 4number
+```
 3. Implement the above task use TDD approach.
 4. Repeat step 2&3 until all tasks are implemented.
