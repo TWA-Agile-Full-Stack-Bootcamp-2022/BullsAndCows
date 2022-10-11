@@ -22,8 +22,9 @@ namespace BullsAndCows
             var secret = this.screit.ToCharArray();
             var inputNumbers = guess.ToCharArray();
             var match = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1 && i == j).Count()).Sum();
+            var positionErrorMatch = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1).Count()).Sum();
 
-            return match + "A" + "0B";
+            return match + "A" + (positionErrorMatch - match) + "B";
         }
 
         public string GetSecret()
