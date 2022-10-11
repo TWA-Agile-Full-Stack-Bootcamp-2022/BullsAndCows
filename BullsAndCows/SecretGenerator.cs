@@ -2,11 +2,11 @@
 
 namespace BullsAndCows
 {
-    public class SecretGenerator
+    public class SecretGenerator : ISecretGenerator
     {
-        public virtual string GenerateSecret()
+        public string GenerateSecret()
         {
-            throw new NotImplementedException();
+            return "1234";
         }
     }
 }

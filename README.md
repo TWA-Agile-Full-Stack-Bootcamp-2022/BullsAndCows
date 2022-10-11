@@ -26,6 +26,12 @@ For example: the secret is 1 2 3 4, then there are the following outputs based o
 ## Practice Requirement
 
 1. Draw the whole task diagram firstly.
+![img.png](img.png)
 2. Design and write tests for a task.
+```angular2html
+given : secret generator
+when : new game
+then: should set secret as generated
+```
 3. Implement the above task use TDD approach.
 4. Repeat step 2&3 until all tasks are implemented.

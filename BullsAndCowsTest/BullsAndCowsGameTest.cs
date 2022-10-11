@@ -1,4 +1,5 @@
 using BullsAndCows;
+using Moq;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -12,6 +13,19 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
             Assert.NotNull(game);
             Assert.True(game.CanContinue);
+        }
+
+        [Fact]
+        public void Should_generate_secret_when_game_init()
+        {
+            //given
+            var mockGenerator = new Mock<ISecretGenerator>();
+            const string secret = "Secret";
+            mockGenerator.Setup(generator => generator.GenerateSecret()).Returns(secret);
+            //when
+            var game = new BullsAndCowsGame(mockGenerator.Object);
+            //then
+            Assert.Equal(secret, game.GetSecret());
         }
     }
 }
