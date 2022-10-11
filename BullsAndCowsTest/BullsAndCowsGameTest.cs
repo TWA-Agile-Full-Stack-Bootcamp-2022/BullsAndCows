@@ -12,7 +12,7 @@ namespace BullsAndCowsTest
             var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             Assert.NotNull(game);
-            Assert.True(game.CanContinue);
+            Assert.True(game.IsCanContinue());
         }
 
         [Fact]
@@ -91,6 +91,24 @@ namespace BullsAndCowsTest
             //when
             var guess = game.Guess("12");
             Assert.Equal("Wrong Input, input again", guess);
+        }
+
+        [Fact]
+        public void Should_set_can_be_continue_false_when_guess_given_input0324_and_secret_1234_over_6()
+        {
+            //given
+            var mockGenerator = new Mock<ISecretGenerator>();
+            const string secret = "1234";
+            mockGenerator.Setup(generator => generator.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockGenerator.Object);
+            //when
+            for (int i = 0; i < 6; i++)
+            {
+                game.Guess("0324");
+            }
+
+            //then
+            Assert.False(game.IsCanContinue());
         }
     }
 }

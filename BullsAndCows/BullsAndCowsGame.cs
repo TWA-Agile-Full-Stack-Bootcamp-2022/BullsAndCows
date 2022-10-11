@@ -8,14 +8,16 @@ namespace BullsAndCows
     {
         private readonly ISecretGenerator secretGenerator;
         private readonly string screit;
+        private int count;
+        private bool canContinue;
 
         public BullsAndCowsGame(ISecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.screit = this.secretGenerator.GenerateSecret();
+            this.count = 0;
+            this.canContinue = true;
         }
-
-        public bool CanContinue => true;
 
         public string Guess(string guess)
         {
@@ -34,6 +36,11 @@ namespace BullsAndCows
 
             var match = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1 && i == j).Count()).Sum();
             var positionErrorMatch = secret.Select((t1, i) => inputNumbers.Where((t, j) => t == t1).Count()).Sum();
+            count += 1;
+            if (count >= 6)
+            {
+                canContinue = false;
+            }
 
             return match + "A" + (positionErrorMatch - match) + "B";
         }
@@ -41,6 +48,11 @@ namespace BullsAndCows
         public string GetSecret()
         {
             return this.screit;
+        }
+
+        public bool IsCanContinue()
+        {
+            return this.canContinue;
         }
     }
 }
