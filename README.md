@@ -67,5 +67,11 @@ given: new game secret 1234
 when: guess over 6
 then: canbecontinue is false
 ```
+
+```angular2html
+given: secret generator
+when: GenerateSecret
+then: return 4number
+```
 3. Implement the above task use TDD approach.
 4. Repeat step 2&3 until all tasks are implemented.

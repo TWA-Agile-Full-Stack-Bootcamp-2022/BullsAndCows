@@ -1,3 +1,4 @@
+using System.Linq;
 using BullsAndCows;
 using Moq;
 using Xunit;
@@ -109,6 +110,34 @@ namespace BullsAndCowsTest
 
             //then
             Assert.False(game.IsCanContinue());
+        }
+    }
+
+    public class SecretGeneratorTest
+    {
+        [Fact]
+        public void Should_return_4_number_no_duplicate_when_generate()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            //when
+            var generateSecret = secretGenerator.GenerateSecret();
+            //then
+            Assert.True(generateSecret.All(char.IsDigit));
+            Assert.Equal(4, generateSecret.Length);
+            Assert.Equal(4, generateSecret.ToCharArray().ToHashSet().Count);
+        }
+
+        [Fact]
+        public void Should_return_4_number_not_same_when_generate_twice()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            //when
+            var generateSecret1 = secretGenerator.GenerateSecret();
+            var generateSecret2 = secretGenerator.GenerateSecret();
+            //then
+            Assert.NotEqual(generateSecret1, generateSecret2);
         }
     }
 }
