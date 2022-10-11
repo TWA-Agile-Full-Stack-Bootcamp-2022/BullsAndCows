@@ -50,5 +50,10 @@ given:  new game secret 1234 and guess 0 3 2 4
 when: guess
 then: 1A2B
 ```
+```angular2html
+given: new game secret 1234 and guess 1132
+when: guess
+then: Wrong Input, input again
+```
 3. Implement the above task use TDD approach.
 4. Repeat step 2&3 until all tasks are implemented.
