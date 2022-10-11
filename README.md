@@ -33,5 +33,10 @@ given : secret generator
 when : new game
 then: should set secret as generated
 ```
+```angular2html
+given: new game secret 1234 and guess 5 6 7 8
+when: guess
+then: 0A0B
+```
 3. Implement the above task use TDD approach.
 4. Repeat step 2&3 until all tasks are implemented.

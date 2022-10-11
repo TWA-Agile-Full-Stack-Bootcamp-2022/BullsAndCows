@@ -17,7 +17,7 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            throw new NotImplementedException();
+            return "0A0B";
         }
 
         public string GetSecret()
