@@ -42,5 +42,21 @@ namespace BullsAndCowsTest
 
             Assert.Equal(result, game.Guess(guess));
         }
+
+        [Fact]
+        public void Should_guess_at_most_6_times()
+        {
+            var secretGenerator = new Mock<SecretGenerator>();
+            secretGenerator.Setup(s => s.GenerateSecret()).Returns("1234");
+            var game = new BullsAndCowsGame(secretGenerator.Object);
+
+            for (var count = 0; count < BullsAndCowsGame.MaxGuessTime; count++)
+            {
+                game.Guess("4321");
+            }
+
+            Assert.Equal("Exceeding max guess times", game.Guess("4321"));
+            Assert.False(game.CanContinue);
+        }
     }
 }

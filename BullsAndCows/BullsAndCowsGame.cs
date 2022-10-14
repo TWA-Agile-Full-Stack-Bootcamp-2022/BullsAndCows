@@ -6,19 +6,28 @@ namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
+        public const int MaxGuessTime = 6;
         private const int SecretLength = 4;
         private readonly SecretGenerator secretGenerator;
         private string secret = string.Empty;
+        private int guessTime = 0;
 
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
+            CanContinue = true;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue { get; set; }
 
         public string Guess(string guess)
         {
+            if (CheckGuessTime())
+            {
+                CanContinue = false;
+                return "Exceeding max guess times";
+            }
+
             if (!CheckGuess(guess))
             {
                 return "Wrong Input, input again";
@@ -29,11 +38,18 @@ namespace BullsAndCows
                 secret = secretGenerator.GenerateSecret();
             }
 
+            guessTime++;
+
             var counts = CountBullsAndCows(guess);
             return $"{counts[0]}A{counts[1]}B";
         }
 
-        public bool CheckGuess(string guess)
+        private bool CheckGuessTime()
+        {
+            return guessTime >= 6;
+        }
+
+        private bool CheckGuess(string guess)
         {
             if (guess.Length != SecretLength)
             {
