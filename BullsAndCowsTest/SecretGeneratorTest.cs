@@ -14,6 +14,17 @@ namespace BullsAndCowsTest
             var generateSecret = secretGenerator.GenerateSecret();
 
             Assert.Equal(4, generateSecret.Length);
+            AssertSecretOnlyContainDigits(generateSecret);
+            AssertSecretDigitsNotDuplicated(generateSecret);
+        }
+
+        private void AssertSecretOnlyContainDigits(string generateSecret)
+        {
+            Assert.True(int.Parse(generateSecret) > 0);
+        }
+
+        private void AssertSecretDigitsNotDuplicated(string generateSecret)
+        {
             var charArray = generateSecret.ToCharArray();
             Assert.NotEqual(charArray[0], charArray[1]);
             Assert.NotEqual(charArray[0], charArray[2]);
