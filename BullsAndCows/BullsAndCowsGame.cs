@@ -6,6 +6,7 @@ namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
+        private const int SecretLength = 4;
         private readonly SecretGenerator secretGenerator;
         private string secret = string.Empty;
 
@@ -29,12 +30,12 @@ namespace BullsAndCows
             }
 
             var counts = CountBullsAndCows(guess);
-            return string.Format("{0}A{1}B", counts[0], counts[1]);
+            return $"{counts[0]}A{counts[1]}B";
         }
 
         public bool CheckGuess(string guess)
         {
-            if (guess.Length != 4)
+            if (guess.Length != SecretLength)
             {
                 return false;
             }
@@ -44,13 +45,8 @@ namespace BullsAndCows
                 return false;
             }
 
-            HashSet<char> set = new HashSet<char>(guess.ToCharArray());
-            if (set.Count != 4)
-            {
-                return false;
-            }
-
-            return true;
+            var set = new HashSet<char>(guess.ToCharArray());
+            return set.Count == SecretLength;
         }
 
         private List<int> CountBullsAndCows(string guess)
@@ -61,7 +57,7 @@ namespace BullsAndCows
             var countBulls = 0;
             var countCows = 0;
 
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < SecretLength; i++)
             {
                 if (guessArray[i] == secretArray[i])
                 {
