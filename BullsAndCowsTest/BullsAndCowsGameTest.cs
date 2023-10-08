@@ -14,6 +14,24 @@ namespace BullsAndCowsTest
             Assert.NotNull(game);
             Assert.True(game.CanContinue);
         }
+
+        [Theory]
+        [InlineData("12")]
+        [InlineData("1A23")]
+        [InlineData("1123")]
+        [InlineData("12345")]
+        public void Should_return_error_message_when_guess_is_invalid(string guess)
+        {
+            // given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            // when
+            var output = game.Guess(guess);
+
+            // then
+            Assert.Equal("Wrong Input, input again", output);
+        }
         [Theory]
         [InlineData("1234")]
         public void Should_return_error_message_when_number_of_guesses_exceeds_6(string secret)
