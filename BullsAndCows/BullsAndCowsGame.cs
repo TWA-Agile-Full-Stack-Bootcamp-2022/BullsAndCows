@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -23,6 +25,15 @@ namespace BullsAndCows
             {
                 return "Run out of chances";
             }
+
+            if (!IsValidGuess(guess))
+            {
+                return "Wrong Input, input again";
+            }
+
+        private bool IsValidGuess(string guess) => guess.Length == secret.Length
+            && guess.All(char.IsDigit)
+            && new HashSet<char>(guess.ToCharArray()).Count == secret.Length;
         }
     }
 }
