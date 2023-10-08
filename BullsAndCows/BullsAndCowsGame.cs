@@ -4,17 +4,25 @@ namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
-        private readonly SecretGenerator secretGenerator;
+        public const int Chances = 6;
+
+        private readonly string secret;
+        private int numberOfGuesses;
+
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
-            this.secretGenerator = secretGenerator;
+            secret = secretGenerator.GenerateSecret();
+            numberOfGuesses = 0;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue => numberOfGuesses < Chances;
 
         public string Guess(string guess)
         {
-            throw new NotImplementedException();
+            if (!CanContinue)
+            {
+                return "Run out of chances";
+            }
         }
     }
 }
