@@ -11,3 +11,6 @@
 /BullsAndCowsRunner/obj
 /BullsAndCowsRunner/bin
 BullsAndCows.sln.DotSettings.user
+
+/coveragereport
+TestResults
