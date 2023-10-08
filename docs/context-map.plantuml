@@ -1,0 +1,36 @@
+@startuml
+
+' Sequence Diagram: https://plantuml.com/sequence-diagram
+
+skinparam sequence {
+    ParticipantBackgroundColor Gainsboro
+    ParticipantBorderColor Transparent
+    LifeLineBorderColor Transparent
+}
+' skinparam SequenceMessageAlign reverseDirection
+' skinparam SequenceMessageAlign center
+
+hide footbox
+
+-> Guess: guess: string
+activate Guess #Gainsboro
+
+create CanContinue
+Guess -> CanContinue
+activate CanContinue #Gainsboro
+return canContinue: bool
+
+create IsValidGuess
+Guess -> IsValidGuess: guess: bool
+activate IsValidGuess #Gainsboro
+return isValidGuess: bool
+
+create CountBullsAndCows
+Guess -> CountBullsAndCows: guess: string
+activate CountBullsAndCows #Gainsboro
+return bullsAndCows: string
+
+<- Guess: answer: string
+deactivate Guess
+
+@enduml
