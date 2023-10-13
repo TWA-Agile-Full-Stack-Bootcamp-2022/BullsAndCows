@@ -1,4 +1,5 @@
 using BullsAndCows;
+using System.Linq;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -19,8 +20,11 @@ namespace BullsAndCowsTest
         {
             // Case for Secret Generator, should be 4 digits different
             // Given
+            var secretGenerator = new SecretGenerator();
             // when
+            int[] secretGenerated = secretGenerator.GenerateSecret();
             // then
+            Assert.Equal(SecretGenerator.MaxSize, secretGenerated.Distinct().Count());
         }
 
         [Theory]
