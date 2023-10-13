@@ -51,7 +51,7 @@ namespace BullsAndCowsTest
         [InlineData("1278", "1234", "2A0B")]
         [InlineData("1238", "1234", "3A0B")]
         [InlineData("1234", "1234", "4A0B")]
-        public void Should_return_the_right_bulls_when_guess_given_matching_digits_are_in_their_right_position(string guess, string secret, string answer)
+        public void Should_return_the_right_bulls_when_guess_given_matching_digits_are_in_their_right_position(string guessNumber, string secretGiven, string answerExpected)
         {
             // Case for Bulls only
             // Given
@@ -63,7 +63,7 @@ namespace BullsAndCowsTest
         [InlineData("1567", "1234", "1A0B")]
         [InlineData("2478", "1234", "0A2B")]
         [InlineData("0324", "1234", "1A2B")]
-        public void Should_return_the_right_bulls_and_cows_when_guess_matching_digits_both_in_right_or_diffent__position(string guess, string secret, string answer)
+        public void Should_return_the_right_bulls_and_cows_when_guess_matching_digits_both_in_right_or_diffent__position(string guessNumber, string secretGiven, string answerExpected)
         {
             // Case for Cows and Bulls
             // Given
