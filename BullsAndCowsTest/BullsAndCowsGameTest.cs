@@ -55,15 +55,20 @@ namespace BullsAndCowsTest
         {
             // Case for Bulls only
             // Given
+            var mockedSecretGenerator = new Mock<SecretGenerator>();
+            mockedSecretGenerator.Setup(genrator => genrator.GenerateSecret()).Returns(secretGiven);
+            var game = new BullsAndCowsGame(mockedSecretGenerator.Object);
             // when
+            string answer = game.Guess(guessNumber);
             // then
+            Assert.Equal(answerExpected, answer);
         }
 
         [Theory]
         [InlineData("1567", "1234", "1A0B")]
         [InlineData("2478", "1234", "0A2B")]
         [InlineData("0324", "1234", "1A2B")]
-        public void Should_return_the_right_bulls_and_cows_when_guess_matching_digits_both_in_right_or_diffent__position(string guessNumber, string secretGiven, string answerExpected)
+        public void Should_return_the_right_bulls_and_cows_when_guess_matching_digits_both_in_right_or_diffent_position(string guessNumber, string secretGiven, string answerExpected)
         {
             // Case for Cows and Bulls
             // Given

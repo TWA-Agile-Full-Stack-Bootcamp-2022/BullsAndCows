@@ -15,18 +15,29 @@ namespace BullsAndCows
 
         public bool CanContinue => true;
 
-        public string Guess(string guess)
+        public string Guess(string guessNumbers)
         {
-            string answer = "0A";
+            int bullCount = 0;
             int cowCount = 0;
-            guess.ToImmutableList().ForEach(guessNumber =>
+            int guessNumberIndex = 0;
+            guessNumbers.ToImmutableList().ForEach(guessNumber =>
                 {
-                    if (secret.Contains(guessNumber))
+                    int matchedSceretNumberIdex = secret.IndexOf(guessNumber);
+                    if (matchedSceretNumberIdex >= 0)
                     {
-                        cowCount++;
+                        if (matchedSceretNumberIdex == guessNumberIndex)
+                        {
+                            bullCount++;
+                        }
+                        else
+                        {
+                            cowCount++;
+                        }
                     }
+
+                    guessNumberIndex++;
                 });
-            return answer + cowCount + "B";
+            return bullCount + "A" + cowCount + "B";
         }
     }
 }
