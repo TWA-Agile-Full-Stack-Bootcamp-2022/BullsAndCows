@@ -1,5 +1,6 @@
 using BullsAndCows;
 using Moq;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -102,8 +103,12 @@ namespace BullsAndCowsTest
         {
             // Case for Wrong Input Exception
             // Given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
             // when
+            Action action = () => game.Guess(notValidGuessNumber);
             // then
+            Assert.Throws<WrongInputException>(action);
         }
 
         [Fact]
