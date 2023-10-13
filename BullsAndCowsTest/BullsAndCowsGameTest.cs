@@ -85,8 +85,14 @@ namespace BullsAndCowsTest
         {
             // Case for All wrong number
             // Given
+            var mockedSecretGenerator = new Mock<SecretGenerator>();
+            const string givenSecret = "1234";
+            mockedSecretGenerator.Setup(genrator => genrator.GenerateSecret()).Returns(givenSecret);
+            var game = new BullsAndCowsGame(mockedSecretGenerator.Object);
             // when
+            string answer = game.Guess("5678");
             // then
+            Assert.Equal("0A0B", answer);
         }
 
         [Theory]
