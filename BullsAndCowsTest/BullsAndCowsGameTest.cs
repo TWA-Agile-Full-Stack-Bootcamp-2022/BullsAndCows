@@ -132,8 +132,18 @@ namespace BullsAndCowsTest
         {
             // Case for Game finished by arrive maximum attempts
             // Given
+            var mockedSecretGenerator = new Mock<SecretGenerator>();
+            const string givenSecret = "1234";
+            mockedSecretGenerator.Setup(genrator => genrator.GenerateSecret()).Returns(givenSecret);
+            var game = new BullsAndCowsGame(mockedSecretGenerator.Object);
             // when
+            for (int i = 0; i < 6; i++)
+            {
+                game.Guess("5648");
+            }
+
             // then
+            Assert.False(game.CanContinue);
         }
     }
 }
