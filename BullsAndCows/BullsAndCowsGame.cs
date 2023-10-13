@@ -9,13 +9,14 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
+        private bool canContinue = true;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.secret = secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue { get => canContinue; set => canContinue = value; }
 
         public string Guess(string guessNumbers)
         {
@@ -44,6 +45,11 @@ namespace BullsAndCows
 
                     guessNumberIndex++;
                 });
+            if (bullCount == SecretGenerator.MaxSize)
+            {
+                CanContinue = false;
+            }
+
             return bullCount + "A" + cowCount + "B";
         }
     }
