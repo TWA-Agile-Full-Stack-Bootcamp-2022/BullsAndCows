@@ -7,7 +7,7 @@ namespace BullsAndCows
     {
         public const int MaxSize = 4;
 
-        public virtual int[] GenerateSecret()
+        public virtual string GenerateSecret()
         {
             Random random = new Random();
             int[] digits = Enumerable.Range(1, 10).ToArray();
@@ -19,7 +19,7 @@ namespace BullsAndCows
                 digits[randomIndex] = digits[rangeSize];
             }
 
-            return secretNumbers;
+            return string.Join(string.Empty, secretNumbers);
         }
     }
 }

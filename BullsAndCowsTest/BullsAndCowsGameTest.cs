@@ -22,7 +22,7 @@ namespace BullsAndCowsTest
             // Given
             var secretGenerator = new SecretGenerator();
             // when
-            int[] secretGenerated = secretGenerator.GenerateSecret();
+            string secretGenerated = secretGenerator.GenerateSecret();
             // then
             Assert.Equal(SecretGenerator.MaxSize, secretGenerated.Distinct().Count());
         }
@@ -35,6 +35,8 @@ namespace BullsAndCowsTest
         public void Should_return_the_right_cows_when_guess_given_matching_digits_but_in_different_position(string guess, string secret, string answer)
         {
             // Case for Cows only
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
             // Given
             // when
             // then
