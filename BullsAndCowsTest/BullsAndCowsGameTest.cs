@@ -1,4 +1,5 @@
 using BullsAndCows;
+using Moq;
 using System.Linq;
 using Xunit;
 
@@ -32,14 +33,17 @@ namespace BullsAndCowsTest
         [InlineData("5621", "1234", "0A2B")]
         [InlineData("5321", "1234", "0A3B")]
         [InlineData("4321", "1234", "0A4B")]
-        public void Should_return_the_right_cows_when_guess_given_matching_digits_but_in_different_position(string guess, string secret, string answer)
+        public void Should_return_the_right_cows_when_guess_given_matching_digits_but_in_different_position(string guessNumber, string secretGiven, string answerExpected)
         {
             // Case for Cows only
-            var secretGenerator = new SecretGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
             // Given
+            var mockedSecretGenerator = new Mock<SecretGenerator>();
+            mockedSecretGenerator.Setup(genrator => genrator.GenerateSecret()).Returns(secretGiven);
+            var game = new BullsAndCowsGame(mockedSecretGenerator.Object);
             // when
+            string answer = game.Guess(guessNumber);
             // then
+            Assert.Equal(answerExpected, answer);
         }
 
         [Theory]
