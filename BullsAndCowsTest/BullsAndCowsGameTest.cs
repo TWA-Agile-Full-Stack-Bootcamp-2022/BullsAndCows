@@ -63,5 +63,20 @@ namespace BullsAndCowsTest
 
             Assert.Equal(guessResult, result);
         }
+
+        [Fact]
+        public void Should_can_not_continue_when_guess_6_times()
+        {
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(x => x.GenerateSecret()).Returns("1234");
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            for (int i = 0; i < 6; i++)
+            {
+                game.Guess("5678");
+            }
+
+            Assert.False(game.CanContinue);
+        }
     }
 }
