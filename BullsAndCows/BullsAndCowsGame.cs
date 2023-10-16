@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -14,7 +15,12 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            throw new NotImplementedException();
+            if (guess.Length != 4 || !guess.All(char.IsDigit))
+            {
+                return "Wrong Input, input again";
+            }
+
+            return string.Empty;
         }
     }
 }
