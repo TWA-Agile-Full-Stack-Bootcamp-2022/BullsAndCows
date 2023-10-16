@@ -6,9 +6,11 @@ namespace BullsAndCows
     public class BullsAndCowsGame
     {
         private readonly SecretGenerator secretGenerator;
+        private readonly string secret;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
+            this.secret = secretGenerator.GenerateSecret();
         }
 
         public bool CanContinue => true;
@@ -20,7 +22,21 @@ namespace BullsAndCows
                 return "Wrong Input, input again";
             }
 
-            return string.Empty;
+            var bullsCount = 0;
+            var cowsCount = 0;
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (guess[i] == secret[i])
+                {
+                    bullsCount++;
+                }
+                else if (secret.Contains(guess[i]))
+                {
+                    cowsCount++;
+                }
+            }
+
+            return $"{bullsCount}A{cowsCount}B";
         }
     }
 }
