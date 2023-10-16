@@ -1,5 +1,6 @@
 using BullsAndCows;
 using Xunit;
+using Moq;
 
 namespace BullsAndCowsTest
 {
@@ -32,6 +33,17 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
 
             var output = game.Guess("1a23");
+
+            Assert.Equal("Wrong Input, input again", output);
+        }
+
+        [Fact]
+        public void Should_return_wrong_input_when_input_digital_is_repeat()
+        {
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            var output = game.Guess("1123");
 
             Assert.Equal("Wrong Input, input again", output);
         }
