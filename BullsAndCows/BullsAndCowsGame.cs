@@ -14,7 +14,22 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            throw new NotImplementedException();
+            if (!ValidInput(guess))
+            {
+                return "Wrong Input, input again";
+            }
+
+            return guess;
+        }
+
+        private bool ValidInput(string guess)
+        {
+            if (guess.Length != 4)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

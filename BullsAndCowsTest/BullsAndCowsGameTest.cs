@@ -1,4 +1,6 @@
 using BullsAndCows;
+using Moq;
+using System;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -12,6 +14,15 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
             Assert.NotNull(game);
             Assert.True(game.CanContinue);
+        }
+
+        [Fact]
+        public void Should_return_Wrong_Input_when_Length_less_than_4()
+        {
+            var mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame bullsAndCowsGame = new BullsAndCowsGame(mock.Object);
+            string answer = bullsAndCowsGame.Guess("123");
+            Assert.Equal("Wrong Input, input again", answer);
         }
     }
 }
