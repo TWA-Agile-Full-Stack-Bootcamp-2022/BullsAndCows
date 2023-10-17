@@ -29,6 +29,19 @@ namespace BullsAndCows
                 return false;
             }
 
+            for (int i = 0; i < 4; i++)
+            {
+                if (!char.IsDigit(guess[i]))
+                {
+                    return false;
+                }
+
+                if (guess.IndexOf(guess[i]) != i)
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
     }

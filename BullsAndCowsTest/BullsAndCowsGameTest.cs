@@ -24,5 +24,23 @@ namespace BullsAndCowsTest
             string answer = bullsAndCowsGame.Guess("123");
             Assert.Equal("Wrong Input, input again", answer);
         }
+
+        [Fact]
+        public void Should_invalid_when_input_has_nondigit()
+        {
+            Mock<SecretGenerator> mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame bullsAndCowsGame = new BullsAndCowsGame(mock.Object);
+            string answer = bullsAndCowsGame.Guess("123a");
+            Assert.Equal("Wrong Input, input again", answer);
+        }
+
+        [Fact]
+        public void Should_invalid_when_input_has_duplication()
+        {
+            Mock<SecretGenerator> mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame bullsAndCowsGame = new BullsAndCowsGame(mock.Object);
+            string answer = bullsAndCowsGame.Guess("1231");
+            Assert.Equal("Wrong Input, input again", answer);
+        }
     }
 }
