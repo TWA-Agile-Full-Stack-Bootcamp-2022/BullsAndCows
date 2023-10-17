@@ -42,5 +42,17 @@ namespace BullsAndCowsTest
             string answer = bullsAndCowsGame.Guess("1231");
             Assert.Equal("Wrong Input, input again", answer);
         }
+
+        [Fact]
+        public void Should_generate_secret_when_first_guess()
+        {
+            Mock<SecretGenerator> mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame bullsAndCowsGame = new BullsAndCowsGame(mock.Object);
+            mock.Verify(x => x.GenerateSecret(), Times.Never);
+            bullsAndCowsGame.Guess("1234");
+            mock.Verify(x => x.GenerateSecret(), Times.Once);
+            bullsAndCowsGame.Guess("2345");
+            mock.Verify(x => x.GenerateSecret(), Times.Once);
+        }
     }
 }

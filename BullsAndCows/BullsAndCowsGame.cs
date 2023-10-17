@@ -5,6 +5,8 @@ namespace BullsAndCows
     public class BullsAndCowsGame
     {
         private readonly SecretGenerator secretGenerator;
+        private int guessTimes = 0;
+        private string secret;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -18,6 +20,13 @@ namespace BullsAndCows
             {
                 return "Wrong Input, input again";
             }
+
+            if (guessTimes == 0)
+            {
+                guessTimes++;
+                secret = secretGenerator.GenerateSecret();
+            }
+
 
             return guess;
         }
