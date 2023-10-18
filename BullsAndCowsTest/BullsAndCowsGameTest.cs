@@ -54,5 +54,19 @@ namespace BullsAndCowsTest
             bullsAndCowsGame.Guess("2345");
             mock.Verify(x => x.GenerateSecret(), Times.Once);
         }
+
+        [Fact]
+        public void Should_not_able_to_continue_when_reach_max_guess_times()
+        {
+            Mock<SecretGenerator> mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame game = new BullsAndCowsGame(mock.Object);
+            for (int i = 0; i < 6; i++)
+            {
+                Assert.True(game.CanContinue);
+                game.Guess("1234");
+            }
+
+            Assert.False(game.CanContinue);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace BullsAndCows
             this.secretGenerator = secretGenerator;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue => guessTimes < 6;
 
         public string Guess(string guess)
         {
@@ -23,11 +23,10 @@ namespace BullsAndCows
 
             if (guessTimes == 0)
             {
-                guessTimes++;
                 secret = secretGenerator.GenerateSecret();
             }
 
-
+            guessTimes++;
             return guess;
         }
 
