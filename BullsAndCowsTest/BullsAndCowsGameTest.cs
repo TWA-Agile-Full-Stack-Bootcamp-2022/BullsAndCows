@@ -68,5 +68,17 @@ namespace BullsAndCowsTest
 
             Assert.False(game.CanContinue);
         }
+
+        [Fact]
+        public void Should_get_correct_answer()
+        {
+            Mock<SecretGenerator> mock = new Mock<SecretGenerator>();
+            BullsAndCowsGame game = new BullsAndCowsGame(mock.Object);
+            mock.Setup(x => x.GenerateSecret()).Returns("1234");
+
+            string answer = game.Guess("1423");
+
+            Assert.Equal("1A3B", answer);
+        }
     }
 }

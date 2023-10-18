@@ -26,8 +26,33 @@ namespace BullsAndCows
                 secret = secretGenerator.GenerateSecret();
             }
 
-            guessTimes++;
-            return guess;
+            string answer = Answer(guess);
+            guessTimes = answer == "4A0B" ? 6 : guessTimes + 1;
+            return answer;
+        }
+
+        private string Answer(string guess)
+        {
+            var matchTimes = 0;
+            var samePosition = 0;
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (guess[i] == secret[i])
+                {
+                    samePosition++;
+                }
+
+                for (int j = 0; j < secret.Length; j++)
+                {
+                    if (guess[i] == secret[j])
+                    {
+                        matchTimes++;
+                    }
+                }
+            }
+
+            matchTimes -= samePosition;
+            return samePosition + "A" + matchTimes + "B";
         }
 
         private bool ValidInput(string guess)
